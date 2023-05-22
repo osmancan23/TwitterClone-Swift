@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
             profileTableView.topAnchor.constraint(equalTo: view.topAnchor),
             profileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    
         ]
        
        NSLayoutConstraint.activate(profileTableViewConstraints)
@@ -37,9 +38,11 @@ class ProfileViewController: UIViewController {
         profileTableView.dataSource = self
         profileTableView.delegate = self
         configureConstraints()
-        
-        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 320))
+        profileTableView.contentInsetAdjustmentBehavior = .never
+        navigationController?.navigationBar.isHidden = true
+        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 380))
         profileTableView.tableHeaderView = headerView
+        
     }
     
 }
