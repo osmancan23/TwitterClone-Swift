@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController {
 
@@ -48,6 +49,17 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         timelineTableView.frame = view.frame
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        
+        if Auth.auth().currentUser == nil {
+            let vc = UINavigationController(rootViewController: OnboardViewController())
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        }
     }
 
 }
