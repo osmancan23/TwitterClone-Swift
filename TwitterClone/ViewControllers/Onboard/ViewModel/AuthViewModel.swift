@@ -48,8 +48,21 @@ import Combine
                  }
                  
              } receiveValue: { [weak self] user in
+                 self?.saveUser()
              }
              .store(in: &subscriptions)
+
+     }
+     
+     func saveUser()   {
+         DatabaseManager.instance.createUserProfile(user: self.user!).sink { completion in
+             if case .failure(let error) = completion {
+                    self.error = error.localizedDescription
+            }
+         } receiveValue: { value in
+             print("Adding user record to database: \(value)")
+
+         }.store(in: &subscriptions)
 
      }
 
@@ -57,15 +70,14 @@ import Combine
           guard let email = email,
                 let password = password else { return }
           AuthManager.instance.login(with: email, password: password)
-              .handleEvents(receiveOutput: { [weak self] user in
-                  self?.user = user
-              })
+              
               .sink { [weak self] completion in
                   if case .failure(let error) = completion {
                       self?.error = error.localizedDescription
                   }
                   
               } receiveValue: { [weak self] user in
+                  self?.user = user
               }
               .store(in: &subscriptions)
 

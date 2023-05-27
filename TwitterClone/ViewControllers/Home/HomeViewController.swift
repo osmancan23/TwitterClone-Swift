@@ -7,8 +7,12 @@
 
 import UIKit
 import Firebase
-
+import Combine
 class HomeViewController: UIViewController {
+
+    let viewModel = HomeViewModel()
+    
+    private var subscriptions: Set<AnyCancellable> = []
 
     var timelineTableView : UITableView = {
         let tableView = UITableView()
@@ -46,6 +50,8 @@ class HomeViewController: UIViewController {
         timelineTableView.delegate = self
         timelineTableView.dataSource = self
         configureAppbar()
+        bindViews()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -67,12 +73,28 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func completeUserOnboarding() {
+           let vc = ProfileCompleteViewController()
+           present(vc, animated: true)
+       }
+    
+    func bindViews()  {
+        viewModel.$user.sink { user in
+            guard let user = user else {return }
+            
+            if !user.isUserOnboarded {
+                self.completeUserOnboarding()
+            }
+        }.store(in: &subscriptions)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-       
-    
+
         handleAuthStatus()
+        
+        viewModel.fetchUser()
+        
     }
 
 }

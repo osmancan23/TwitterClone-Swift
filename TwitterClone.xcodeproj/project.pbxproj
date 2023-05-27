@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CD01DDC52A1A969500DF4A40 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01DDC42A1A969500DF4A40 /* ProfileTableViewHeader.swift */; };
+		CD2E297F2A2279E800491A72 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E297E2A2279E800491A72 /* DatabaseManager.swift */; };
+		CD2E29822A227A5E00491A72 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E29812A227A5E00491A72 /* UserModel.swift */; };
+		CD2E29852A22847700491A72 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E29842A22847700491A72 /* HomeViewModel.swift */; };
+		CD2E29872A22871D00491A72 /* ProfileCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */; };
 		CD430A272A1A1B7900F798E0 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD430A262A1A1B7900F798E0 /* TweetTableViewCell.swift */; };
 		CD6E09492A195E48003234CA /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E09482A195E48003234CA /* UIView-Extension.swift */; };
 		CD78ADD22A1FE71F00F0ABD1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */; };
@@ -40,6 +44,10 @@
 
 /* Begin PBXFileReference section */
 		CD01DDC42A1A969500DF4A40 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
+		CD2E297E2A2279E800491A72 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		CD2E29812A227A5E00491A72 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CD2E29842A22847700491A72 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompleteViewController.swift; sourceTree = "<group>"; };
 		CD430A262A1A1B7900F798E0 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		CD6E09482A195E48003234CA /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
 		CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -83,6 +91,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2E29802A227A5300491A72 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CD2E29812A227A5E00491A72 /* UserModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CD2E29832A22846600491A72 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CD85BA4B2A1949BD00E3C332 /* HomeViewController.swift */,
+				CD2E29842A22847700491A72 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		CD6E09422A1959B3003234CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */,
+				CD2E297E2A2279E800491A72 /* DatabaseManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -135,6 +161,7 @@
 		CD85BA352A19468000E3C332 /* TwitterClone */ = {
 			isa = PBXGroup;
 			children = (
+				CD2E29802A227A5300491A72 /* Models */,
 				CD78ADD32A1FEEB300F0ABD1 /* NetworkManager */,
 				CD6E09472A195E36003234CA /* Extensions */,
 				CD6E09422A1959B3003234CA /* Views */,
@@ -153,12 +180,13 @@
 		CD85BA4A2A19492100E3C332 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD2E29832A22846600491A72 /* Home */,
 				CDE184422A1D63CD0032A1A4 /* Onboard */,
-				CD85BA4B2A1949BD00E3C332 /* HomeViewController.swift */,
 				CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */,
 				CD85BA4F2A1949E300E3C332 /* NotificationViewController.swift */,
 				CD85BA512A1949F200E3C332 /* MessageViewController.swift */,
 				CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */,
+				CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -276,11 +304,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2E29852A22847700491A72 /* HomeViewModel.swift in Sources */,
 				CD85BA4E2A1949C500E3C332 /* SearchViewController.swift in Sources */,
 				CD85BA3B2A19468000E3C332 /* MainTabbarViewController.swift in Sources */,
 				CDE184412A1D5CAF0032A1A4 /* OnboardViewController.swift in Sources */,
 				CD01DDC52A1A969500DF4A40 /* ProfileTableViewHeader.swift in Sources */,
+				CD2E297F2A2279E800491A72 /* DatabaseManager.swift in Sources */,
 				CD78ADD52A1FEEC100F0ABD1 /* AuthManager.swift in Sources */,
+				CD2E29872A22871D00491A72 /* ProfileCompleteViewController.swift in Sources */,
 				CDDD59A12A1A510E00BCBC8A /* ProfileViewController.swift in Sources */,
 				CD430A272A1A1B7900F798E0 /* TweetTableViewCell.swift in Sources */,
 				CD85BA502A1949E300E3C332 /* NotificationViewController.swift in Sources */,
@@ -291,6 +322,7 @@
 				CDD8F6932A2244F000F55FBD /* LoginViewController.swift in Sources */,
 				CDE184442A1D63E60032A1A4 /* RegisterViewController.swift in Sources */,
 				CD85BA4C2A1949BD00E3C332 /* HomeViewController.swift in Sources */,
+				CD2E29822A227A5E00491A72 /* UserModel.swift in Sources */,
 				CD85BA522A1949F200E3C332 /* MessageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -92,7 +92,7 @@ class OnboardViewController: UIViewController {
         view.addSubview(promptLabel)
         view.addSubview(loginButton)
         
-        registerButton.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(onTapRegister), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
         
         configureConstraints()
