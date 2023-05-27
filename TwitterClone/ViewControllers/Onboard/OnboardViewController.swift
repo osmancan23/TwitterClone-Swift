@@ -92,7 +92,7 @@ class OnboardViewController: UIViewController {
         view.addSubview(promptLabel)
         view.addSubview(loginButton)
         
-        registerButton.addTarget(self, action: #selector(onTapRegister), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
         
         configureConstraints()
@@ -106,8 +106,11 @@ class OnboardViewController: UIViewController {
     }
     
     @objc func onTapLogin()  {
-         print("register")
-     }
+        let vc = LoginViewController()
+       
+       navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
 
 }

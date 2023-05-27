@@ -10,6 +10,8 @@
 		CD01DDC52A1A969500DF4A40 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01DDC42A1A969500DF4A40 /* ProfileTableViewHeader.swift */; };
 		CD430A272A1A1B7900F798E0 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD430A262A1A1B7900F798E0 /* TweetTableViewCell.swift */; };
 		CD6E09492A195E48003234CA /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E09482A195E48003234CA /* UIView-Extension.swift */; };
+		CD78ADD22A1FE71F00F0ABD1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */; };
+		CD78ADD52A1FEEC100F0ABD1 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */; };
 		CD85BA372A19468000E3C332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA362A19468000E3C332 /* AppDelegate.swift */; };
 		CD85BA392A19468000E3C332 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA382A19468000E3C332 /* SceneDelegate.swift */; };
 		CD85BA3B2A19468000E3C332 /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA3A2A19468000E3C332 /* MainTabbarViewController.swift */; };
@@ -19,6 +21,7 @@
 		CD85BA4E2A1949C500E3C332 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */; };
 		CD85BA502A1949E300E3C332 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA4F2A1949E300E3C332 /* NotificationViewController.swift */; };
 		CD85BA522A1949F200E3C332 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA512A1949F200E3C332 /* MessageViewController.swift */; };
+		CDD8F6932A2244F000F55FBD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F6922A2244F000F55FBD /* LoginViewController.swift */; };
 		CDDD59A12A1A510E00BCBC8A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */; };
 		CDE1842A2A1D5B0F0032A1A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE184292A1D5B0F0032A1A4 /* GoogleService-Info.plist */; };
 		CDE1842D2A1D5BC10032A1A4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CDE1842C2A1D5BC10032A1A4 /* FirebaseAuth */; };
@@ -39,6 +42,8 @@
 		CD01DDC42A1A969500DF4A40 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 		CD430A262A1A1B7900F798E0 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		CD6E09482A195E48003234CA /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
+		CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CD85BA332A19468000E3C332 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD85BA362A19468000E3C332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD85BA382A19468000E3C332 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 		CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CD85BA4F2A1949E300E3C332 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		CD85BA512A1949F200E3C332 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		CDD8F6922A2244F000F55FBD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CDE184292A1D5B0F0032A1A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDE184402A1D5CAF0032A1A4 /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +100,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CD78ADD02A1FE70A00F0ABD1 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				CDE184432A1D63E60032A1A4 /* RegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		CD78ADD32A1FEEB300F0ABD1 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 		CD85BA2A2A19468000E3C332 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +135,7 @@
 		CD85BA352A19468000E3C332 /* TwitterClone */ = {
 			isa = PBXGroup;
 			children = (
+				CD78ADD32A1FEEB300F0ABD1 /* NetworkManager */,
 				CD6E09472A195E36003234CA /* Extensions */,
 				CD6E09422A1959B3003234CA /* Views */,
 				CD85BA4A2A19492100E3C332 /* ViewControllers */,
@@ -140,11 +163,29 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CDD8F68F2A22442D00F55FBD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CDD8F6922A2244F000F55FBD /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CDD8F6902A22443300F55FBD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		CDE184422A1D63CD0032A1A4 /* Onboard */ = {
 			isa = PBXGroup;
 			children = (
+				CDD8F6902A22443300F55FBD /* ViewModel */,
+				CDD8F68F2A22442D00F55FBD /* Login */,
+				CD78ADD02A1FE70A00F0ABD1 /* Register */,
 				CDE184402A1D5CAF0032A1A4 /* OnboardViewController.swift */,
-				CDE184432A1D63E60032A1A4 /* RegisterViewController.swift */,
 			);
 			path = Onboard;
 			sourceTree = "<group>";
@@ -239,12 +280,15 @@
 				CD85BA3B2A19468000E3C332 /* MainTabbarViewController.swift in Sources */,
 				CDE184412A1D5CAF0032A1A4 /* OnboardViewController.swift in Sources */,
 				CD01DDC52A1A969500DF4A40 /* ProfileTableViewHeader.swift in Sources */,
+				CD78ADD52A1FEEC100F0ABD1 /* AuthManager.swift in Sources */,
 				CDDD59A12A1A510E00BCBC8A /* ProfileViewController.swift in Sources */,
 				CD430A272A1A1B7900F798E0 /* TweetTableViewCell.swift in Sources */,
 				CD85BA502A1949E300E3C332 /* NotificationViewController.swift in Sources */,
 				CD6E09492A195E48003234CA /* UIView-Extension.swift in Sources */,
 				CD85BA372A19468000E3C332 /* AppDelegate.swift in Sources */,
+				CD78ADD22A1FE71F00F0ABD1 /* AuthViewModel.swift in Sources */,
 				CD85BA392A19468000E3C332 /* SceneDelegate.swift in Sources */,
+				CDD8F6932A2244F000F55FBD /* LoginViewController.swift in Sources */,
 				CDE184442A1D63E60032A1A4 /* RegisterViewController.swift in Sources */,
 				CD85BA4C2A1949BD00E3C332 /* HomeViewController.swift in Sources */,
 				CD85BA522A1949F200E3C332 /* MessageViewController.swift in Sources */,

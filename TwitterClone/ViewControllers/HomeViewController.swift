@@ -34,6 +34,8 @@ class HomeViewController: UIViewController {
         navigationItem.titleView  = view
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(onClickProfile))
+       
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .done, target: self, action: #selector(signOut))
     }
     
    
@@ -51,15 +53,26 @@ class HomeViewController: UIViewController {
         timelineTableView.frame = view.frame
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-        
+   @objc private func signOut()  {
+      try? Auth.auth().signOut()
+       handleAuthStatus()
+       
+    }
+    
+    private func handleAuthStatus() {
         if Auth.auth().currentUser == nil {
             let vc = UINavigationController(rootViewController: OnboardViewController())
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       
+    
+        handleAuthStatus()
     }
 
 }

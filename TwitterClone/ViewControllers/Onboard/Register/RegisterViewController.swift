@@ -6,9 +6,19 @@
 //
 
 import UIKit
-
+import Combine
 class RegisterViewController: UIViewController {
 
+    private var viewModel = AuthViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
+
+    func presentAlert(message:String)  {
+        let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(action)
+        present(alert,animated: true)
+   }
+    
     let titleLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,9 +62,45 @@ class RegisterViewController: UIViewController {
            button.layer.masksToBounds = true
            button.layer.cornerRadius = 25
            button.isEnabled = false
+           
            return button
        }()
     
+    @objc func didChangeEmailField()  {
+        viewModel.email = emailField.text
+        viewModel.validateFormValue()
+    }
+    
+   @objc func didChangePasswordField()  {
+       viewModel.password = passwordField.text
+       viewModel.validateFormValue()
+    }
+    
+    func bindViewModel()  {
+        emailField.addTarget(self, action: #selector(didChangeEmailField), for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
+        
+        
+        
+        viewModel.$isValidate.sink { [weak self] value in
+            self!.registerButton.isEnabled = value
+        }.store(in: &subscriptions)
+        
+        viewModel.$user.sink { [weak self] user in
+                   guard user != nil else { return }
+                   guard let vc = self?.navigationController?.viewControllers.first as? OnboardViewController else { return }
+                   vc.dismiss(animated: true)
+               }
+               .store(in: &subscriptions)
+               
+               
+               viewModel.$error.sink { [weak self] errorString in
+                   guard let error = errorString else { return }
+                   self?.presentAlert(message: error)
+                
+               }
+               .store(in: &subscriptions)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,10 +111,16 @@ class RegisterViewController: UIViewController {
         view.addSubview(passwordField)
         view.addSubview(registerButton)
         
+        registerButton.addTarget(self, action: #selector(onTapRegister), for: .touchUpInside)
         
         configureConstraints()
+        
+        bindViewModel()
     }
     
+   @objc private func onTapRegister()  {
+        viewModel.register()
+    }
 
     func configureConstraints()  {
         
