@@ -91,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD12472D2A24C624005FFA26 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */,
+				CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		CD2E29802A227A5300491A72 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,13 +189,12 @@
 		CD85BA4A2A19492100E3C332 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD12472D2A24C624005FFA26 /* Profile */,
 				CD2E29832A22846600491A72 /* Home */,
 				CDE184422A1D63CD0032A1A4 /* Onboard */,
 				CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */,
 				CD85BA4F2A1949E300E3C332 /* NotificationViewController.swift */,
 				CD85BA512A1949F200E3C332 /* MessageViewController.swift */,
-				CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */,
-				CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
