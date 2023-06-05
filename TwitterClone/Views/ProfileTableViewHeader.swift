@@ -101,8 +101,8 @@ class ProfileTableViewHeader: UIView {
         guard let label = sender.titleLabel?.text as? String else {return}
         
         switch label {
-            case TweetBar.tweets.rawValue:
-            selectedIndex = 0
+        case TweetBar.tweets.rawValue:
+        selectedIndex = 0
         case TweetBar.tweetsReplies.rawValue:
         selectedIndex = 1
         case TweetBar.media.rawValue:
@@ -123,7 +123,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
-    private let followerCountLabel : UILabel = {
+     let followerCountLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "323"
@@ -142,7 +142,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
-    private let followingCountLabel : UILabel = {
+     let followingCountLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "311"

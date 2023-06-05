@@ -6,9 +6,16 @@
 //
 
 import UIKit
-
+import Combine
+import SDWebImage
 class ProfileViewController: UIViewController {
 
+    let viewModel = ProfileViewModel()
+    
+    var subcriptions : Set<AnyCancellable> = []
+    
+    
+    
     let profileTableView : UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints=false
@@ -29,7 +36,8 @@ class ProfileViewController: UIViewController {
        
     }
     
-    
+    lazy  var headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 380))
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,11 +48,29 @@ class ProfileViewController: UIViewController {
         configureConstraints()
         profileTableView.contentInsetAdjustmentBehavior = .never
         navigationController?.navigationBar.isHidden = true
-        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 380))
         profileTableView.tableHeaderView = headerView
-        
+        bindViews()
     }
     
+    func bindViews()  {
+        viewModel.$user.sink { user in
+            guard let user = user else {return }
+            
+            self.headerView.userNameLabel.text = user.username
+            self.headerView.bioLabel.text = user.bio
+            self.headerView.displayNameLabel.text = user.displayName
+            self.headerView.userNameLabel.text = "@\(user.username)"
+            self.headerView.profileAvatarImageView.sd_setImage(with: URL(string:user.avatarPath), placeholderImage: UIImage(named: "photo"), options: .allowInvalidSSLCertificates)
+            self.headerView.followerCountLabel.text = "\(user.followersCount)"
+            self.headerView.followingCountLabel.text = "\(user.followingCount)"
+
+        }.store(in: &subcriptions)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchUser()
+    }
 }
 
 extension ProfileViewController : UITableViewDataSource , UITableViewDelegate {

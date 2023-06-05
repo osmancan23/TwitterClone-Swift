@@ -31,6 +31,11 @@ class DatabaseManager {
                     .eraseToAnyPublisher()
     }
     
+    func updateUserProfile(data: [String:Any], id:String) -> AnyPublisher<Bool,Error> {
+        return firestore.collection(userPath).document(id).updateData(data).tryMap() { _ in return true }
+            .eraseToAnyPublisher()
+    }
+    
     
 }
 

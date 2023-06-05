@@ -7,9 +7,14 @@
 
 import UIKit
 import PhotosUI
-
+import Combine
+import ProgressHUD
 class ProfileCompleteViewController: UIViewController {
 
+    let viewModel = ProfileCompleteViewModel()
+    
+    var subscriptions :Set<AnyCancellable> = []
+    
     let scrollView : UIScrollView = {
        let scrollView = UIScrollView()
        scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +78,7 @@ class ProfileCompleteViewController: UIViewController {
         return textField
     }()
     
-    private let bioTextView: UITextView = {
+     let bioTextView: UITextView = {
            
             let textView = UITextView()
             textView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +93,7 @@ class ProfileCompleteViewController: UIViewController {
         }()
     
     let saveButton : UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Save", for: .normal)
         button.tintColor = .white
@@ -97,7 +102,7 @@ class ProfileCompleteViewController: UIViewController {
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 25
         button.isEnabled = false
-        
+
         return button
     }()
     
@@ -160,6 +165,39 @@ class ProfileCompleteViewController: UIViewController {
 
     }
     
+  @objc private func changedDisplayName() {
+      viewModel.displayName = displayNameField.text
+      viewModel.validateValues()
+  }
+    
+    @objc private func changedUserName() {
+        viewModel.userName = userNameField.text
+        viewModel.validateValues()
+      }
+    
+    func bindViews()  {
+        displayNameField.addTarget(self, action: #selector(changedDisplayName), for: .editingChanged)
+        userNameField.addTarget(self, action: #selector(changedUserName), for: .editingChanged)
+        
+        viewModel.$isValidate.sink { [weak self] isSuccess in
+            self?.saveButton.isEnabled = isSuccess
+        }.store(in: &subscriptions)
+        
+        
+        viewModel.$isCompleteOnboard.sink { isSuccess in
+            
+            if isSuccess {
+                ProgressHUD.dismiss()
+
+                self.dismiss(animated: true)
+
+            }
+            else {
+                ProgressHUD.showError()
+            }
+        }.store(in: &subscriptions )
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -179,6 +217,14 @@ class ProfileCompleteViewController: UIViewController {
         
         configureConstraints()
         avatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToUpload)))
+        saveButton.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
+
+        bindViews()
+    }
+    
+    @objc private func didTapSubmit() {
+        ProgressHUD.show()
+        viewModel.uploadAvatar()
     }
     
     @objc private func didTapToUpload() {
@@ -217,6 +263,11 @@ extension ProfileCompleteViewController: UITextViewDelegate, UITextFieldDelegate
         }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.bioText = bioTextView.text
+        viewModel.validateValues()
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
             scrollView.setContentOffset(CGPoint(x: 0, y: textField.frame.origin.y - 100), animated: true)
         }
@@ -234,7 +285,9 @@ extension ProfileCompleteViewController: PHPickerViewControllerDelegate {
                 if let image = object as? UIImage {
                     DispatchQueue.main.async {
                         self?.avatarImageView.image = image
-                        
+                        self?.viewModel.avatarImage = image
+                        self?.viewModel.validateValues()
+
                     }
                 }
             }

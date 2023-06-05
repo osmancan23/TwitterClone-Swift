@@ -25,6 +25,9 @@
 		CD85BA4E2A1949C500E3C332 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */; };
 		CD85BA502A1949E300E3C332 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA4F2A1949E300E3C332 /* NotificationViewController.swift */; };
 		CD85BA522A1949F200E3C332 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA512A1949F200E3C332 /* MessageViewController.swift */; };
+		CD8F64212A252E0E001F3E65 /* ProfileCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8F64202A252E0E001F3E65 /* ProfileCompleteViewModel.swift */; };
+		CD8F64232A253380001F3E65 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8F64222A253380001F3E65 /* StorageManager.swift */; };
+		CDCFD5C02A2A6B44006299E6 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CDCFD5BF2A2A6B44006299E6 /* ProgressHUD */; };
 		CDD8F6932A2244F000F55FBD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F6922A2244F000F55FBD /* LoginViewController.swift */; };
 		CDDD59A12A1A510E00BCBC8A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */; };
 		CDE1842A2A1D5B0F0032A1A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE184292A1D5B0F0032A1A4 /* GoogleService-Info.plist */; };
@@ -40,6 +43,8 @@
 		CDE1843F2A1D5BC10032A1A4 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CDE1843E2A1D5BC10032A1A4 /* FirebaseStorageCombine-Community */; };
 		CDE184412A1D5CAF0032A1A4 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE184402A1D5CAF0032A1A4 /* OnboardViewController.swift */; };
 		CDE184442A1D63E60032A1A4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE184432A1D63E60032A1A4 /* RegisterViewController.swift */; };
+		CDF1F67F2A2E267C0072DB84 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1F67E2A2E267C0072DB84 /* ProfileViewModel.swift */; };
+		CDF1F6822A2E28250072DB84 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CDF1F6812A2E28250072DB84 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,11 +68,14 @@
 		CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CD85BA4F2A1949E300E3C332 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		CD85BA512A1949F200E3C332 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		CD8F64202A252E0E001F3E65 /* ProfileCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompleteViewModel.swift; sourceTree = "<group>"; };
+		CD8F64222A253380001F3E65 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CDD8F6922A2244F000F55FBD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CDE184292A1D5B0F0032A1A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDE184402A1D5CAF0032A1A4 /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		CDE184432A1D63E60032A1A4 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CDF1F67E2A2E267C0072DB84 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +85,11 @@
 			files = (
 				CDE184332A1D5BC10032A1A4 /* FirebaseDatabaseSwift in Frameworks */,
 				CDE184312A1D5BC10032A1A4 /* FirebaseDatabase in Frameworks */,
+				CDCFD5C02A2A6B44006299E6 /* ProgressHUD in Frameworks */,
 				CDE1843F2A1D5BC10032A1A4 /* FirebaseStorageCombine-Community in Frameworks */,
 				CDE1843D2A1D5BC10032A1A4 /* FirebaseStorage in Frameworks */,
 				CDE1842D2A1D5BC10032A1A4 /* FirebaseAuth in Frameworks */,
+				CDF1F6822A2E28250072DB84 /* SDWebImage in Frameworks */,
 				CDE1842F2A1D5BC10032A1A4 /* FirebaseAuthCombine-Community in Frameworks */,
 				CDE184352A1D5BC10032A1A4 /* FirebaseDynamicLinks in Frameworks */,
 				CDE184372A1D5BC10032A1A4 /* FirebaseFirestore in Frameworks */,
@@ -96,6 +106,8 @@
 			children = (
 				CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */,
 				CDDD59A02A1A510E00BCBC8A /* ProfileViewController.swift */,
+				CD8F64202A252E0E001F3E65 /* ProfileCompleteViewModel.swift */,
+				CDF1F67E2A2E267C0072DB84 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -147,6 +159,7 @@
 			children = (
 				CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */,
 				CD2E297E2A2279E800491A72 /* DatabaseManager.swift */,
+				CD8F64222A253380001F3E65 /* StorageManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -253,6 +266,8 @@
 				CDE1843A2A1D5BC10032A1A4 /* FirebaseFirestoreSwift */,
 				CDE1843C2A1D5BC10032A1A4 /* FirebaseStorage */,
 				CDE1843E2A1D5BC10032A1A4 /* FirebaseStorageCombine-Community */,
+				CDCFD5BF2A2A6B44006299E6 /* ProgressHUD */,
+				CDF1F6812A2E28250072DB84 /* SDWebImage */,
 			);
 			productName = TwitterClone;
 			productReference = CD85BA332A19468000E3C332 /* TwitterClone.app */;
@@ -284,6 +299,8 @@
 			mainGroup = CD85BA2A2A19468000E3C332;
 			packageReferences = (
 				CDE1842B2A1D5BC10032A1A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CDCFD5BE2A2A6B44006299E6 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				CDF1F6802A2E28240072DB84 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = CD85BA342A19468000E3C332 /* Products */;
 			projectDirPath = "";
@@ -323,8 +340,11 @@
 				CDDD59A12A1A510E00BCBC8A /* ProfileViewController.swift in Sources */,
 				CD430A272A1A1B7900F798E0 /* TweetTableViewCell.swift in Sources */,
 				CD85BA502A1949E300E3C332 /* NotificationViewController.swift in Sources */,
+				CD8F64212A252E0E001F3E65 /* ProfileCompleteViewModel.swift in Sources */,
 				CD6E09492A195E48003234CA /* UIView-Extension.swift in Sources */,
+				CD8F64232A253380001F3E65 /* StorageManager.swift in Sources */,
 				CD85BA372A19468000E3C332 /* AppDelegate.swift in Sources */,
+				CDF1F67F2A2E267C0072DB84 /* ProfileViewModel.swift in Sources */,
 				CD78ADD22A1FE71F00F0ABD1 /* AuthViewModel.swift in Sources */,
 				CD85BA392A19468000E3C332 /* SceneDelegate.swift in Sources */,
 				CDD8F6932A2244F000F55FBD /* LoginViewController.swift in Sources */,
@@ -541,6 +561,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CDCFD5BE2A2A6B44006299E6 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
 		CDE1842B2A1D5BC10032A1A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -549,9 +577,22 @@
 				minimumVersion = 10.10.0;
 			};
 		};
+		CDF1F6802A2E28240072DB84 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CDCFD5BF2A2A6B44006299E6 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDCFD5BE2A2A6B44006299E6 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
 		CDE1842C2A1D5BC10032A1A4 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CDE1842B2A1D5BC10032A1A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -601,6 +642,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CDE1842B2A1D5BC10032A1A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		CDF1F6812A2E28250072DB84 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDF1F6802A2E28240072DB84 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
