@@ -12,7 +12,8 @@ import Firebase
 class ProfileViewModel : ObservableObject {
     @Published var user : UserModel?
     @Published var error: String?
-        
+    @Published var tweets: [TweetModel]?
+
     private var subscriptions: Set<AnyCancellable> = []
     
     func fetchUser()  {
@@ -24,6 +25,20 @@ class ProfileViewModel : ObservableObject {
             }
         } receiveValue: { user in
             self.user = user
+            self.fetchMyTweets()
+        }.store(in: &subscriptions)
+
+    }
+    
+    func fetchMyTweets()  {
+        guard let id = Auth.auth().currentUser?.uid else { return }
+
+        DatabaseManager.instance.fetchMyTweets(authorId: id).sink { completion in
+            if case let .failure(error) = completion {
+                self.error = error.localizedDescription
+            }
+        } receiveValue: { list in
+            self.tweets = list
         }.store(in: &subscriptions)
 
     }

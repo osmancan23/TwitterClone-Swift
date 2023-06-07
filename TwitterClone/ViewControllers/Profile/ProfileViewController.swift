@@ -65,6 +65,13 @@ class ProfileViewController: UIViewController {
             self.headerView.followingCountLabel.text = "\(user.followingCount)"
             self.headerView.joinedDateLabel.text = "\(self.viewModel.convertDate(date: user.createdOn))"
         }.store(in: &subcriptions)
+        
+        viewModel.$tweets.sink { [weak self] tweets in
+            DispatchQueue.main.async {
+                self?.profileTableView.reloadData()
+
+            }
+        }.store(in: &subcriptions)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,11 +82,13 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController : UITableViewDataSource , UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return viewModel.tweets?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
+        cell.setup(tweet: viewModel.tweets![indexPath.row])
+        
         return cell
     }
     

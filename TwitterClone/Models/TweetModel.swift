@@ -16,4 +16,6 @@ struct TweetModel : Codable {
     let likers: [String]
     let isReply: Bool
     let parentReference: String?
+    var createdOn: Date = Date()
+
 }

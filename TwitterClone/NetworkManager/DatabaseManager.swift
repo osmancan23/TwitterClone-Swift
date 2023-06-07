@@ -43,7 +43,7 @@ class DatabaseManager {
         }.eraseToAnyPublisher()
     }
     
-    func fetchTweets(authorId:String) -> AnyPublisher<[TweetModel],Error> {
+    func fetchMyTweets(authorId:String) -> AnyPublisher<[TweetModel],Error> {
         return firestore.collection(tweetsPath).whereField("authorId", isEqualTo: authorId).getDocuments().tryMap(\.documents).tryMap { snapshots in
             try snapshots.map({
               try  $0.data(as: TweetModel.self)
@@ -51,5 +51,12 @@ class DatabaseManager {
         }.eraseToAnyPublisher()
     }
     
+    func fetchAllTweets() -> AnyPublisher<[TweetModel],Error> {
+        return firestore.collection(tweetsPath).order(by: "createdOn",descending: true).getDocuments().tryMap(\.documents).tryMap { snapshots in
+            try snapshots.map({
+              try  $0.data(as: TweetModel.self)
+            })
+        }.eraseToAnyPublisher()
+    }
 }
 

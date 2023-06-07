@@ -33,7 +33,7 @@ final class HomeViewModel : ObservableObject {
     func fetchTweets()  {
         guard let id = Auth.auth().currentUser?.uid else { return }
 
-        DatabaseManager.instance.fetchTweets(authorId: id).sink { completion in
+        DatabaseManager.instance.fetchAllTweets().sink { completion in
             switch completion {
             case .failure(let error):
                 self.error = error.localizedDescription
