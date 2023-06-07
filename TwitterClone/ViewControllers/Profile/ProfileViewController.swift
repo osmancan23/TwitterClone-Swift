@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController {
             self.headerView.profileAvatarImageView.sd_setImage(with: URL(string:user.avatarPath), placeholderImage: UIImage(named: "photo"), options: .allowInvalidSSLCertificates)
             self.headerView.followerCountLabel.text = "\(user.followersCount)"
             self.headerView.followingCountLabel.text = "\(user.followingCount)"
-
+            self.headerView.joinedDateLabel.text = "\(self.viewModel.convertDate(date: user.createdOn))"
         }.store(in: &subcriptions)
     }
     

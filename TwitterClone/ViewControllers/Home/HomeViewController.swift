@@ -14,6 +14,24 @@ class HomeViewController: UIViewController {
     
     private var subscriptions: Set<AnyCancellable> = []
 
+    
+   private lazy var tweetButton : UIButton  = {
+        let button = UIButton(type: .system, primaryAction: UIAction  {
+            [weak self] _ in
+            
+            self?.navigateToTweetView()
+        })
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let image = UIImage(systemName: "plus")
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .tweeterColor
+        button.cornerRadius = 30
+        button.clipsToBounds = false
+        return button
+    }()
+    
+    
     var timelineTableView : UITableView = {
         let tableView = UITableView()
         tableView.register(TweetTableViewCell.self,  forCellReuseIdentifier: TweetTableViewCell.identifier)
@@ -23,6 +41,17 @@ class HomeViewController: UIViewController {
     
     @objc func onClickProfile()  {
         navigationController?.pushViewController(ProfileViewController(), animated: true)
+    }
+    
+    func navigateToTweetView()  {
+        let vc = UINavigationController(rootViewController: TweetComposeViewController())
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.present(vc, animated: true)
+        
+       /* let vc = TweetComposeViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)*/
     }
     private func configureAppbar (){
         let size : CGFloat = 36
@@ -42,11 +71,22 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .done, target: self, action: #selector(signOut))
     }
     
+    func configureConstraints()  {
+        let tweetButtonConstraints = [
+            tweetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            tweetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            tweetButton.widthAnchor.constraint(equalToConstant: 60),
+            tweetButton.heightAnchor.constraint(equalToConstant: 60),
+        ]
+        
+        NSLayoutConstraint.activate(tweetButtonConstraints)
+    }
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(timelineTableView)
+        view.addSubview(tweetButton)
         timelineTableView.delegate = self
         timelineTableView.dataSource = self
         configureAppbar()
@@ -57,6 +97,7 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         timelineTableView.frame = view.frame
+        configureConstraints()
     }
     
    @objc private func signOut()  {
@@ -86,6 +127,13 @@ class HomeViewController: UIViewController {
                 self.completeUserOnboarding()
             }
         }.store(in: &subscriptions)
+        
+        viewModel.$tweets.sink { [weak self] tweets in
+            DispatchQueue.main.async {
+                self?.timelineTableView.reloadData()
+
+            }
+        }.store(in: &subscriptions)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,22 +142,22 @@ class HomeViewController: UIViewController {
         handleAuthStatus()
         
         viewModel.fetchUser()
-        
     }
 
 }
 
 extension HomeViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.tweets?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as? TweetTableViewCell else {
                    return UITableViewCell()
                }
-               
-               return cell
+        cell.setup(tweet: viewModel.tweets![indexPath.row])
+        
+        return cell
     }
     
   

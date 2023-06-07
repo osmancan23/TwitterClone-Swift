@@ -59,7 +59,7 @@ class ProfileTableViewHeader: UIView {
     private let indicator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
+        view.backgroundColor = .tweeterColor
         return view
     }()
     
@@ -151,7 +151,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
-    private let joinedDateLabel: UILabel = {
+     let joinedDateLabel: UILabel = {
           
            let label = UILabel()
            label.translatesAutoresizingMaskIntoConstraints = false
