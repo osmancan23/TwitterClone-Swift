@@ -6,11 +6,14 @@
 //
 
 import UIKit
-
+import Combine
 class SearchViewController: UIViewController  {
     
     let searchController = UISearchController()
+    let viewModel = SearchViewModel()
     
+    var subscriptions : Set<AnyCancellable> = []
+
     
     var tableView : UITableView = {
         let tableView = UITableView()
@@ -38,12 +41,33 @@ class SearchViewController: UIViewController  {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = searchController.searchBar
+        
+        bindViews()
 
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.frame
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchUsers(value: " ")
+    }
+    
+    func bindViews()  {
+        viewModel.$users.sink { [weak self] completion in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }.store(in: &subscriptions)
+        
+        viewModel.$error.sink { error in
+            print(error)
+        }.store(in: &subscriptions)
+       
+
     }
 
    
@@ -52,13 +76,13 @@ class SearchViewController: UIViewController  {
 
 extension SearchViewController : UISearchResultsUpdating , UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  3
+        return  viewModel.users?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      guard let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as? UserTableViewCell else{
             return UITableViewCell()}
-        
+        cell.setup(user: viewModel.users![indexPath.row])
         return cell
     }
     
@@ -66,7 +90,16 @@ extension SearchViewController : UISearchResultsUpdating , UITableViewDelegate, 
         guard let text = searchController.searchBar.text else {
             return
         }
+        viewModel.fetchUsers(value: text)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ProfileViewController()
+        vc.userId = viewModel.users![indexPath.row].id
         
-        print(text)
+        let controller = UINavigationController(rootViewController: vc)
+        controller.modalPresentationStyle = .fullScreen
+        
+        self.present(controller, animated: true)
     }
 }

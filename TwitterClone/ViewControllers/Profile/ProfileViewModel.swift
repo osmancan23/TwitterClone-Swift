@@ -16,24 +16,23 @@ class ProfileViewModel : ObservableObject {
 
     private var subscriptions: Set<AnyCancellable> = []
     
-    func fetchUser()  {
-        guard let id = Auth.auth().currentUser?.uid else { return }
+    func fetchUser(userId: String)  {
 
-        DatabaseManager.instance.fetchUserProfile(id: id).sink { completion in
+        DatabaseManager.instance.fetchUserProfile(id: userId).sink { completion in
             if case .failure(let error) = completion {
                 self.error = error.localizedDescription
             }
         } receiveValue: { user in
             self.user = user
-            self.fetchMyTweets()
+            self.fetchMyTweets(userId: userId)
         }.store(in: &subscriptions)
 
     }
     
-    func fetchMyTweets()  {
-        guard let id = Auth.auth().currentUser?.uid else { return }
+    func fetchMyTweets(userId:String)  {
+        
 
-        DatabaseManager.instance.fetchMyTweets(authorId: id).sink { completion in
+        DatabaseManager.instance.fetchMyTweets(authorId: userId).sink { completion in
             if case let .failure(error) = completion {
                 self.error = error.localizedDescription
             }

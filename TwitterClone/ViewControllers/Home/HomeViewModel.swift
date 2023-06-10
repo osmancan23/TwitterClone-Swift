@@ -31,7 +31,6 @@ final class HomeViewModel : ObservableObject {
     }
     
     func fetchTweets()  {
-        guard let id = Auth.auth().currentUser?.uid else { return }
 
         DatabaseManager.instance.fetchAllTweets().sink { completion in
             switch completion {

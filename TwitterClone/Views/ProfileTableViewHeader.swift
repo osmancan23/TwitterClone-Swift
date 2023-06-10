@@ -92,6 +92,8 @@ class ProfileTableViewHeader: UIView {
                 button.tintColor = .secondaryLabel
             }
             
+            
+            
             button.addTarget(self, action: #selector(onTapTab(_:)), for: .touchUpInside)
         }
     }

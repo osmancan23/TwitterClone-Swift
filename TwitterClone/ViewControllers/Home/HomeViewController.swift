@@ -40,7 +40,9 @@ class HomeViewController: UIViewController {
     }()
     
     @objc func onClickProfile()  {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        let vc = ProfileViewController()
+        vc.userId = Auth.auth().currentUser?.uid
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func navigateToTweetView()  {

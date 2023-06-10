@@ -9,7 +9,9 @@ import UIKit
 import Combine
 import SDWebImage
 class ProfileViewController: UIViewController {
-
+    
+    var userId : String?
+    
     let viewModel = ProfileViewModel()
     
     var subcriptions : Set<AnyCancellable> = []
@@ -40,7 +42,6 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.title = "Profile"
         view.addSubview(profileTableView)
         profileTableView.dataSource = self
@@ -76,7 +77,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchUser()
+        viewModel.fetchUser(userId: userId!)
     }
 }
 

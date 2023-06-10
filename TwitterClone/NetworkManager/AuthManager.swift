@@ -26,6 +26,11 @@ class AuthManager {
                        }
                    }
                }
+           
+           
+           
+           
+           
                .eraseToAnyPublisher()
        }
        
@@ -40,6 +45,7 @@ class AuthManager {
                        let error = NSError(domain: "YourDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not found"])
                        promise(.failure(error))
                    }
+                   
                    
                }
            }.eraseToAnyPublisher()

@@ -17,6 +17,7 @@ class DatabaseManager {
     
     private let userPath =  "users"
     private let tweetsPath = "tweets"
+    
     private let firestore = Firestore.firestore()
     
     func createUserProfile(user:User) -> AnyPublisher<Bool,Error>  {
@@ -57,6 +58,18 @@ class DatabaseManager {
               try  $0.data(as: TweetModel.self)
             })
         }.eraseToAnyPublisher()
+    }
+    
+    
+    func fetchUsers(value: String) -> AnyPublisher<[UserModel],Error> {
+        print(value)
+        return firestore.collection(userPath)
+             .whereField("displayName", isGreaterThanOrEqualTo: value)
+            .whereField("displayName", isLessThan: value + "z").getDocuments().tryMap(\.documents).tryMap { snapshots in
+                try snapshots.map({
+                    try $0.data(as: UserModel.self)
+                })
+            }.eraseToAnyPublisher()
     }
 }
 

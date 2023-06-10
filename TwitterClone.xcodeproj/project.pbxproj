@@ -16,6 +16,7 @@
 		CD2E29872A22871D00491A72 /* ProfileCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */; };
 		CD430A272A1A1B7900F798E0 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD430A262A1A1B7900F798E0 /* TweetTableViewCell.swift */; };
 		CD6E09492A195E48003234CA /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6E09482A195E48003234CA /* UIView-Extension.swift */; };
+		CD764CF22A339FCC00715AD4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD764CF12A339FCC00715AD4 /* SearchViewModel.swift */; };
 		CD78ADD22A1FE71F00F0ABD1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */; };
 		CD78ADD52A1FEEC100F0ABD1 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */; };
 		CD85BA372A19468000E3C332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD85BA362A19468000E3C332 /* AppDelegate.swift */; };
@@ -62,6 +63,7 @@
 		CD2E29862A22871D00491A72 /* ProfileCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompleteViewController.swift; sourceTree = "<group>"; };
 		CD430A262A1A1B7900F798E0 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		CD6E09482A195E48003234CA /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
+		CD764CF12A339FCC00715AD4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		CD78ADD12A1FE71F00F0ABD1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		CD78ADD42A1FEEC100F0ABD1 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		CD85BA332A19468000E3C332 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				CD85BA4D2A1949C500E3C332 /* SearchViewController.swift */,
+				CD764CF12A339FCC00715AD4 /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				CD85BA2F2A19468000E3C332 /* Sources */,
 				CD85BA302A19468000E3C332 /* Frameworks */,
 				CD85BA312A19468000E3C332 /* Resources */,
+				CD97C6552A34714E006313FC /* Swift Format */,
 			);
 			buildRules = (
 			);
@@ -347,6 +351,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CD97C6552A34714E006313FC /* Swift Format */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftformat > /dev/null; then\n  swiftformat\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CD85BA2F2A19468000E3C332 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -370,6 +395,7 @@
 				CD8F64232A253380001F3E65 /* StorageManager.swift in Sources */,
 				CD96B44D2A32769900C6EC5F /* UserTableViewCell.swift in Sources */,
 				CD86DD4E2A2F9BF500E145F0 /* TweetModel.swift in Sources */,
+				CD764CF22A339FCC00715AD4 /* SearchViewModel.swift in Sources */,
 				CD85BA372A19468000E3C332 /* AppDelegate.swift in Sources */,
 				CDF1F67F2A2E267C0072DB84 /* ProfileViewModel.swift in Sources */,
 				CD78ADD22A1FE71F00F0ABD1 /* AuthViewModel.swift in Sources */,

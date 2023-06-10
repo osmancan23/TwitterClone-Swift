@@ -20,8 +20,6 @@ class UserTableViewCell: UITableViewCell {
           imageView.layer.masksToBounds = true
           imageView.clipsToBounds = true
           imageView.backgroundColor = .red
-          let image = UIImage(systemName: "person")
-          imageView.image = image
           return imageView
       }()
       
@@ -30,7 +28,6 @@ class UserTableViewCell: UITableViewCell {
           let label = UILabel()
           label.font = .systemFont(ofSize: 18, weight: .bold)
           label.translatesAutoresizingMaskIntoConstraints = false
-          label.text = "Mahsun"
           return label
       }()
       
@@ -39,7 +36,6 @@ class UserTableViewCell: UITableViewCell {
           label.textColor = .secondaryLabel
           label.font = .systemFont(ofSize: 16, weight: .regular)
           label.translatesAutoresizingMaskIntoConstraints = false
-          label.text = "zali"
 
           return label
       }()
@@ -86,5 +82,11 @@ class UserTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup(user:UserModel)  {
+        avatarImageView.sd_setImage(with: URL(string: user.avatarPath))
+        displayNameLabel.text = user.displayName
+        usernameLabel.text = user.username
     }
 }
