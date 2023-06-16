@@ -37,6 +37,7 @@ class SearchViewController: UIViewController  {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         searchController.searchResultsUpdater = self
+        searchController.automaticallyShowsCancelButton = false
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -96,7 +97,6 @@ extension SearchViewController : UISearchResultsUpdating , UITableViewDelegate, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ProfileViewController()
         vc.userId = viewModel.users![indexPath.row].id
-        
         let controller = UINavigationController(rootViewController: vc)
         controller.modalPresentationStyle = .fullScreen
         

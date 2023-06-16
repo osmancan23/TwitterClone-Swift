@@ -6,8 +6,16 @@
 //
 
 import UIKit
-
+import Combine
+import Firebase
 class ProfileTableViewHeader: UIView {
+   
+    let userID : String
+
+    let viewModel = ProfileHeaderViewModel()
+    
+    var subscriptions : Set<AnyCancellable> = []
+    
    
     private enum TweetBar : String {
         case tweets = "Tweets"
@@ -40,16 +48,12 @@ class ProfileTableViewHeader: UIView {
         didSet{
             for i in 0..<tabs.count {
 
-                UIView.animate(withDuration: 0.3, delay: 0) {
-                    self.sectionStack.arrangedSubviews[i].tintColor = i == self.selectedIndex ? .label : .secondaryLabel
-                    self.leadingAnchors[i].isActive = i == self.selectedIndex ? true : false
-                                        self.trailingAnchors[i].isActive = i == self.selectedIndex ? true : false
-                                        self.layoutIfNeeded()
+            UIView.animate(withDuration: 0.3, delay: 0) {
+            self.sectionStack.arrangedSubviews[i].tintColor = i == self.selectedIndex ? .label : .secondaryLabel
+            self.leadingAnchors[i].isActive = i == self.selectedIndex ? true : false
+            self.trailingAnchors[i].isActive = i == self.selectedIndex ? true : false
+            self.layoutIfNeeded()
                 }
-                
-              
-                
-                
 
             }
             
@@ -62,6 +66,7 @@ class ProfileTableViewHeader: UIView {
         view.backgroundColor = .tweeterColor
         return view
     }()
+    
     
     private var tabs: [UIButton] = ["Tweets", "Tweets & Replies", "Media", "Likes"]
            .map { buttonTitle in
@@ -116,6 +121,18 @@ class ProfileTableViewHeader: UIView {
         }
     }
     
+    
+    var followButton : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Follow", for: .normal)
+        button.backgroundColor = .tweeterColor
+        button.cornerRadius = 15
+        button.clipsToBounds = true
+        
+        return button
+    }()
+    
     private let followerLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +145,6 @@ class ProfileTableViewHeader: UIView {
      let followerCountLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "323"
         label.textColor = .label
         label.font = .systemFont(ofSize: 15, weight: .bold)
         return label
@@ -147,7 +163,6 @@ class ProfileTableViewHeader: UIView {
      let followingCountLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "311"
         label.textColor = .label
         label.font = .systemFont(ofSize: 15, weight: .bold)
         return label
@@ -157,7 +172,6 @@ class ProfileTableViewHeader: UIView {
           
            let label = UILabel()
            label.translatesAutoresizingMaskIntoConstraints = false
-           label.text = "Joined May 2021"
            label.textColor = .secondaryLabel
            label.font = .systemFont(ofSize: 14, weight: .regular)
            return label
@@ -259,6 +273,8 @@ class ProfileTableViewHeader: UIView {
             bioLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5)
         ]
         
+       
+        
         
         let joinDateImageViewConstraints = [
                    joinDateImageView.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
@@ -303,6 +319,13 @@ class ProfileTableViewHeader: UIView {
                    indicator.topAnchor.constraint(equalTo: sectionStack.arrangedSubviews[0].bottomAnchor),
                    indicator.heightAnchor.constraint(equalToConstant: 4)
                ]
+        
+        let followButtonConstraints = [
+            followButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            followButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            followButton.heightAnchor.constraint(equalToConstant: 35),
+            followButton.widthAnchor.constraint(equalToConstant: 110)
+        ]
                
         NSLayoutConstraint.activate(backgroundImageConstraints)
         NSLayoutConstraint.activate(profileAvatarImageConstraints)
@@ -317,29 +340,92 @@ class ProfileTableViewHeader: UIView {
         NSLayoutConstraint.activate(followerLabelConstraints)
         NSLayoutConstraint.activate(sectionStackConstraints)
         NSLayoutConstraint.activate(indicatorConstraints)
+        NSLayoutConstraint.activate(followButtonConstraints)
 
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        addSubview(backgroundImageView)
-        addSubview(profileAvatarImageView)
-        addSubview(displayNameLabel)
-        addSubview(userNameLabel)
-        addSubview(bioLabel)
-        addSubview(joinedDateLabel)
-        addSubview(joinDateImageView)
-        addSubview(followingCountLabel)
-        addSubview(followingLabel)
-        addSubview(followerCountLabel)
-        addSubview(followerLabel)
-        addSubview(sectionStack)
-        addSubview(indicator)
-        configureConstraints()
-        configureStackButtons()
-    }
+    func bindViews()  {
+        viewModel.$isFollowing.sink { res in
+            if res {
+                self.followButton.setTitle("Following", for: .normal)
+                self.followButton.backgroundColor = .gray
+            }else{
+                self.followButton.setTitle("Follow", for: .normal)
+                self.followButton.backgroundColor = .tweeterColor
+            }
+        }.store(in: &subscriptions)
+        
+        viewModel.$hasUpdated.sink { res in
+            if res {
+                DispatchQueue.main.async {
+                    self.viewModel.checkFollowStatus(followingId: self.userID)
 
+                }
+            }
+        }.store(in: &subscriptions)
+        
+        viewModel.$followingCount.sink { res in
+            self.followingCountLabel.text = "\(res)"
+        }.store(in: &subscriptions)
+        
+        viewModel.$followerCount.sink { res in
+            self.followerCountLabel.text = "\(res)"
+        }.store(in: &subscriptions)
+    }
+    
+    func checkMyProfileView()  {
+        guard let id = Auth.auth().currentUser?.uid else {
+            return
+        }
+        if self.userID == id {
+            self.followButton.isHidden = true
+        }else{
+            self.followButton.addTarget(self, action: #selector(followOrUnfollow), for: .touchUpInside)
+        }
+    }
+    
+    
+   @objc func followOrUnfollow()  {
+       viewModel.followOrUnfollow(followingId: self.userID)
+    }
+    
+  
+    
+
+     init(frame: CGRect, userId: String) {
+        self.userID = userId
+         
+        super.init(frame: frame)
+         
+         backgroundColor = .white
+         addSubview(backgroundImageView)
+         addSubview(profileAvatarImageView)
+         addSubview(displayNameLabel)
+         addSubview(userNameLabel)
+         addSubview(bioLabel)
+         addSubview(joinedDateLabel)
+         addSubview(joinDateImageView)
+         addSubview(followingCountLabel)
+         addSubview(followingLabel)
+         addSubview(followerCountLabel)
+         addSubview(followerLabel)
+         addSubview(sectionStack)
+         addSubview(indicator)
+         addSubview(followButton)
+         
+         configureConstraints()
+         configureStackButtons()
+         checkMyProfileView()
+         viewModel.checkFollowStatus(followingId: self.userID)
+         bindViews()
+         viewModel.fetchFollowerCount(userId: self.userID)
+         viewModel.fetchFollowingCount(userId: self.userID)
+    }
+    
+     
+    
+    
+    
     required init?(coder: NSCoder) {
         fatalError()
     }
